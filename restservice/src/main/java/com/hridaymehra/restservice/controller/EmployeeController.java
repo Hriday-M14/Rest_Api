@@ -49,4 +49,18 @@ public class EmployeeController {
         // use a redirect to prevent duplicate submissions
         return "redirect:/employees/list";
     }
+
+    @GetMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("employeeId") int theId,
+                                    Model theModel) {
+
+        // get the employee from the service
+        Employee theEmployee = employeeService.findById(theId);
+
+        // set employee as a model attribute to pre-populate the form
+        theModel.addAttribute("employee", theEmployee);
+
+        // send over to our form
+        return "employee-form";
+    }
 }
